@@ -30,7 +30,13 @@ public class 구간합_2차원배열 {
 		};
 		
 		for(int i = 0; i < map.length; i++) {
-			for(int j = 0; j < map[i].length; j++) {
+			System.out.println(Arrays.toString(map[i]));
+		}
+		
+		// 누적합
+		// -map[i-1][j-1] 하는 이유 : 그 부분이 두 번 더해지기 때문에
+		for(int i = 1; i < map.length; i++) {
+			for(int j = 1; j < map[i].length; j++) {
 				map[i][j] = map[i-1][j] + map[i][j-1] - map[i-1][j-1] + map[i][j];
 			}
 		}
@@ -41,12 +47,10 @@ public class 구간합_2차원배열 {
 		}
 		
 		// 쉬프트를 했으니까 출력할 때 신경써야 한다.
-		// 구간합 : 입력데이터를 기준으로 [2][1](포함) ~ [4][3](미포함)
+		// 구간합 : 입력데이터를 기준으로 [3][2](포함) ~ [4][3](포함) : 4칸이 궁금
 		int sr = 2; int sc = 1;
-		int er = 4; int ec = 3;
-		System.out.println(map[er][ec] - map[er][sc] - map[sr][ec] + map[sr][sc]);
-		
-		
+		int r = 4; int c = 3; // 현재 위치
+		System.out.println(map[r][c] - map[r][sc] - map[sr][c] + map[sr][sc]);	
 		
 	} // end of main
 } // end of class

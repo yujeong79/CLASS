@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * prefixSum
  * ps[i][j] = ps[0][0] + ps[0][1] + . . . + ps[0][j]
@@ -32,6 +34,19 @@ public class 구간합_2차원배열 {
 				map[i][j] = map[i-1][j] + map[i][j-1] - map[i-1][j-1] + map[i][j];
 			}
 		}
+		
+		System.out.println();
+		for(int i = 0; i < map.length; i++) {
+			System.out.println(Arrays.toString(map[i]));
+		}
+		
+		// 쉬프트를 했으니까 출력할 때 신경써야 한다.
+		// 구간합 : 입력데이터를 기준으로 [2][1](포함) ~ [4][3](미포함)
+		int sr = 2; int sc = 1;
+		int er = 4; int ec = 3;
+		System.out.println(map[er][ec] - map[er][sc] - map[sr][ec] + map[sr][sc]);
+		
+		
 		
 	} // end of main
 } // end of class

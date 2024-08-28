@@ -13,6 +13,7 @@ public class 퀵정렬01_호어파티션 {
 	}
 	
 	static void quickSort(int left, int right) {
+		// 만약 오른쪽 구간이 정렬이 완료되면 right가 0이 되어서 quickSort(left, -1)이 되므로 여기 if문에 걸려서 종료된다.
 		if(left < right) {
 			int pivot = partition(left, right); // 파티션을 하고 다시 새로 기준이 된 피봇을 기준으로
 			quickSort(left, pivot-1); // 왼쪽을 다시 퀵정렬
@@ -44,6 +45,7 @@ public class 퀵정렬01_호어파티션 {
 		// L과 R이 역전되면 R을 기준으로 왼쪽은 다 pivot보다 작은 상태, 오른쪽은 다 pivot보다 큰 상태가 된다.
 		
 		// 그러면 이제 R의 위치는 사실 피봇이 가야할 위치이다.
+		// 만약 이미 정렬된 상태였다면? R과 left의 위치가 같아져있으므로 둘의 값을 바꿔도 변함이 없게 되는 것이다.
 		int tmp = arr[left]; // pivot을 임시변수에 저장
 		arr[left] = arr[R]; // 오른쪽 구간에서 작았던 값을 저장
 		arr[R] = tmp;

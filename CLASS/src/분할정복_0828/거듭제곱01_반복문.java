@@ -17,6 +17,7 @@ public class 거듭제곱01_반복문 {
 		return result;
 	}
 	
+	// 재귀
 	public static int pow2(int C, int N) {
 		if(N == 1)
 			return C;

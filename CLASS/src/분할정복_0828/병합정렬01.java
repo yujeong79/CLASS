@@ -17,8 +17,8 @@ public class 병합정렬01 {
 		if(left >= right) return;
 		
 		int mid = (left+right)/2;
-		mergeSort(left, mid);
-		mergeSort(mid+1, right);
+		mergeSort(left, mid); // 왼쪽도 계속 반으로 나눠
+		mergeSort(mid+1, right); // 오른쪽도 계속 반으로 나눠
 		merge(left, mid, right);
 	}
 	

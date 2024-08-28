@@ -19,7 +19,7 @@ public class 병합정렬01 {
 		int mid = (left+right)/2;
 		mergeSort(left, mid); // 왼쪽도 계속 반으로 나눠
 		mergeSort(mid+1, right); // 오른쪽도 계속 반으로 나눠
-		merge(left, mid, right); // 정렬된 왼쪽과 오른쪽을 합쳐
+		merge(left, mid, right); // 왼쪽과 오른쪽을 합쳐
 	}
 	
 	// left : 시작점, right : 끝점, mid : 왼쪽 구간의 끝

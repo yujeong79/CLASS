@@ -1,22 +1,41 @@
 package 백트래킹_0829;
 
+import java.util.Arrays;
+
+/*
+ * 단, swap 방식은 사전순으로 순열이 되지 않는다.
+ */
+
 public class 순열01_반복문 {
 	static int[] nums;
 	static int N;
 	
 	public static void main(String[] args) {
-		nums = new int[] {1, 2, 3};
+		nums = new int[] {0, 1, 2};
 		N = nums.length;
 		
-		// 이렇게 하면 요소가 많아질 수록 하기가 어려워진다.
-		for(int i = 0; i < N; i++) {
-			for(int j = 0; j < N; j++) {
-				if(i != j) // 요소의 중복을 제거하기 위함
-				for(int k = 0; k < N; k++) {
-					if(i != k && j != k)
-						System.out.println(nums[i] + ", " + nums[j] + ", " + nums[k]);
-				}
-			}
+		perm(0);
+	}
+	
+	// idx : 현재 판단 위치
+	static void perm(int idx) {
+		if(idx == N) {
+			System.out.println(Arrays.toString(nums));
+			return;
+		}
+		
+		for(int i = idx; i < N; i++) {
+			swap(i, idx);
+			perm(idx + 1);
+			swap(i, idx); // 다음 과정을 위해서 원상 복구
 		}
 	}
+	
+	// 바꾸고 싶은 배열이 static으로 선언했으니 위치 2개만 인자로 보내자
+	static void swap(int a, int b) {
+		int tmp = nums[a];
+		nums[a] = nums[b];
+		nums[b] = tmp;
+	}
 }
+

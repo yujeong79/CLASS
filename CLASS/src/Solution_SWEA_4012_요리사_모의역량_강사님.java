@@ -61,18 +61,16 @@ public class Solution_SWEA_4012_요리사_모의역량_강사님 {
 	// A 음식 재료의 맛의 시너지 합, B 음식의 재료의 맛의 시너지 합의 차를 구해서 minDiff에 업데이트
 	static void check() {
 		int diff = 0; // 두 음식의 차이를 저장
-		int A = 0;
-		int B = 0;
 		
 		for (int i = 0; i < N; i++) {
 			for(int j = i+1; j < N; j++) {
 				if(isSelected[i] && isSelected[j]) // 둘 다 A 음식 재료
-					A += S[i][j] + S[j][i];
+					diff += S[i][j] + S[j][i];
 				else if(!isSelected[i] && !isSelected[j]) // 둘 다 B 음식 재료
-					B += S[i][j] + S[j][i];
+					diff -= S[i][j] + S[j][i];
 			}
 		}
-		diff = Math.abs(A-B);
+		diff = Math.abs(diff);
 		minDiff = Math.min(minDiff, diff);
 	}
 	

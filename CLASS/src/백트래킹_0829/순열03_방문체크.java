@@ -1,22 +1,37 @@
 package 백트래킹_0829;
 
+import java.util.Arrays;
+
 public class 순열03_방문체크 {
 	static int[] nums;
 	static int N;
 	
+	static boolean[] visited;
+	static int[] result;
+	
 	public static void main(String[] args) {
-		nums = new int[] {1, 2, 3};
+		nums = new int[] {0, 1, 2};
 		N = nums.length;
+		visited = new boolean[N];
+		result = new int[N];
+		perm(0);
 		
-		// 이렇게 하면 요소가 많아질 수록 하기가 어려워진다.
+	} // end of main
+	
+	static void perm(int cnt) {
+		if(cnt == N) {
+			System.out.println(Arrays.toString(result));
+		}
+		
 		for(int i = 0; i < N; i++) {
-			for(int j = 0; j < N; j++) {
-				if(i != j) // 요소의 중복을 제거하기 위함
-				for(int k = 0; k < N; k++) {
-					if(i != k && j != k)
-						System.out.println(nums[i] + ", " + nums[j] + ", " + nums[k]);
-				}
-			}
+			// 사용하지 않은 원소를 가지고 만들어야해!
+			// 1. 사용했으면 넘어가
+			if(visited[i]) continue;
+			// 2. 사용하지 않았다면 
+			result[cnt] = nums[i];
+			visited[i] = true; // 해당 i번째 원소는 사용했습니다.
+			perm(cnt+1); // 다음 자리 판단
+			visited[i] = false; // result는 덮어버리니까 굳이 초기화 할 필요는 없음.
 		}
 	}
 }

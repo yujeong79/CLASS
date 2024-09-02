@@ -1,4 +1,4 @@
-package 과목평가5회차;
+package 과목평가5회차.src.과목평가5회차;
 
 import java.io.BufferedReader;
 import java.io.IOException;

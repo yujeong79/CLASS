@@ -1,4 +1,4 @@
-package 과목평가5회차;
+package 과목평가5회차.src.과목평가5회차;
 
 /**
  * 1) 병합 정렬의 pseudocode 또는 java 코드를 작성하시오.

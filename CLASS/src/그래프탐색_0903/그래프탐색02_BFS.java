@@ -1,73 +1,65 @@
 package 그래프탐색_0903;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+
+/**
+ * input
+ * 	첫 줄에는 정점의 개수와 간선의 개수가 공백으로 구분되어 입력
+ * 	다음 줄은 간선의 수 만큼 인접한 정점 2개가 공백으로 구분되어 입력
+ * 7 9
+ * 1 2 1 3 1 6 2 4 2 7 3 4 4 7 5 6 5 7
+ */
 
 public class 그래프탐색02_BFS {
-	static int V, E; // 정점의 개수와 간선의 개수
-	static List<Integer>[] adj; // 인접리스트
-	static boolean[] visited; // 방문 체크
+	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	private static int V; // 정점의 개수
+	private static int E; // 간선의 개수
 	
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(input);
+	private static List<Integer>[] adjList; // 정점과 인접한 정점들을 저장할 리스트
+	private static boolean[] isVisited;
+	
+	public static void main(String[] args) throws IOException {
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		V = Integer.parseInt(st.nextToken());
+		E = Integer.parseInt(st.nextToken());
 		
-		V = sc.nextInt();
-		E = sc.nextInt();
-		
-		adj = new ArrayList[V+1]; // 요소의 타입이 List인 배열만 만들어진 것이고 각 요소의 List가 생성되지는 않은 상태
-		for(int i = 1; i <= V; i++) { // 노드의 시작이 1번이니까
-			adj[i] = new ArrayList<>();
+		adjList = new ArrayList[V+1];
+		for(int i = 1; i <= V; i++) {
+			adjList[i] = new ArrayList<>();
 		}
 		
-		visited = new boolean[V+1];
-		
-		for(int i = 0; i < E; i++) { // 간선의 수만큼 반복
-			int from = sc.nextInt(); // 시작 노드
-			int to = sc.nextInt(); // 끝 노드
+		st = new StringTokenizer(br.readLine(), " ");
+		for(int i = 0; i < E; i++) {
+			int n1 = Integer.parseInt(st.nextToken()); 
+			int n2 = Integer.parseInt(st.nextToken());
 			
-			adj[from].add(to);
-			adj[to].add(from); 
+			adjList[n1].add(n2);
+			adjList[n2].add(n1);
 		}
 		
+		isVisited = new boolean[V+1];
+		bfs(1);
+	}
+
+	private static void bfs(int v) {
+		Queue<Integer> queue = new LinkedList<>();
 		
-	} // end of main
-	
-	/**
-	 * @param v : 시작 정점
-	 */
-	static void bfs(int v) {
-		Queue<Integer> q = new LinkedList<>();
+		queue.add(v);
+		isVisited[v] = true; // 큐에 넣는 순간 방문 체크
 		
-		q.add(v); // 시작 정점을 큐에 넣고 시작
-		visited[v] = true; // 시작 정점을 방문 체크
-		
-		while(!q.isEmpty()) { // 큐가 공백이 되면 종료
-			int curr = q.poll(); // 노드 하나를 꺼냄
+		while(!queue.isEmpty()) {
+			int curr = queue.poll(); 
 			System.out.println(curr);
 			
-			// curr에 인접하면서 방문하지 않은 노드들을 방문하자
-			for(int w : adj[curr]) { // adj[curr] 안에는 curr과 인접한 노드들이 리스트 형태로 저장되어 있음
-				if(!visited[w]) { // 방문하지 않았다면
-					q.add(w);
-					visited[w] = true;
+			for(int w : adjList[curr]) { // 현재 노드의 인접한 노드 중 방문하지 않은 노드들을 큐에 넣기
+				if(!isVisited[w]) {
+					queue.add(w);
+					isVisited[w] = true;
 				}
 			}
 		}
 	}
-	
-	
-	static String input = "7 9\r\n"
-			+ "1 2\r\n"
-			+ "1 3\r\n"
-			+ "1 6\r\n"
-			+ "2 4\r\n"
-			+ "2 7\r\n"
-			+ "3 4\r\n"
-			+ "4 7\r\n"
-			+ "5 6\r\n"
-			+ "5 7";
+
 	
 } // end of class

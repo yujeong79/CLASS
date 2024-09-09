@@ -41,8 +41,6 @@ public class Solution_SWEA_1767_프로세서연결하기_강사님 {
 		int T = Integer.parseInt(br.readLine());
 		int testCase = 0;
 		while(++testCase <= T) {
-			totalCore = 0;
-			
 			N = Integer.parseInt(br.readLine().trim());
 			map = new int[N][N];
 			for(int i = 0; i < N; i++) {

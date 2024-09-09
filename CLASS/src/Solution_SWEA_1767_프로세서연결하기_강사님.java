@@ -43,7 +43,7 @@ public class Solution_SWEA_1767_프로세서연결하기_강사님 {
 		while(++testCase <= T) {
 			totalCore = 0;
 			
-			N = Integer.parseInt(br.readLine());
+			N = Integer.parseInt(br.readLine().trim());
 			map = new int[N][N];
 			for(int i = 0; i < N; i++) {
 				String s = br.readLine();

@@ -69,6 +69,10 @@ public class Solution_SWEA_1767_프로세서연결하기_강사님 {
 	} // end of main
 
 	private static void DFS(int index, int connected, int wireLength, int unConnected) {
+		if(maxCoreCnt > totalCore - unConnected) { // 업데이트가 될 수 없는 경우
+			return;
+		}
+		
 		if(index == coreList.size()) {
 			if(maxCoreCnt < connected) {
 				maxCoreCnt = connected;

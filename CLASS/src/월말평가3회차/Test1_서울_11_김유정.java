@@ -14,7 +14,7 @@ public class Test1_서울_11_김유정 {
 		int T = Integer.parseInt(br.readLine());
 		int testCase = 0;
 		while(++testCase <= T) {
-			H = Integer.parseInt(br.readLine());
+			H = Integer.parseInt(br.readLine()); //
 			
 			long[] dp = new long[H+1];
 			dp[0] = 1;

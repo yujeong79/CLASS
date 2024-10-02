@@ -16,13 +16,14 @@ public class Test1_서울_11_김유정 {
 		while(++testCase <= T) {
 			H = Integer.parseInt(br.readLine());
 			
-			int[] dp = new int[H+1];
+			long[] dp = new long[H+1];
 			dp[0] = 1;
+			dp[1] = 1;
+			dp[2] = 1;
+			dp[3] = 2;
 			
-			for(int s : stairs) {
-				for(int i = s; i <= H; i++) {
-					dp[i] += dp[i-s];
-				}
+			for(int i = 4; i <= H; i++) {
+				dp[i] = dp[i-1] + dp[i-3] + dp[i-4];
 			}
 			
 			sb.append("#" + testCase + " " + dp[H] + "\n");

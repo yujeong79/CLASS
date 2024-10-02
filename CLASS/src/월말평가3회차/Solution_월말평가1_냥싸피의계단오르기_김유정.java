@@ -3,7 +3,7 @@ package 월말평가3회차;
 import java.io.*;
 import java.util.*;
 
-public class Test1_서울_11_김유정 {
+public class Solution_월말평가1_냥싸피의계단오르기_김유정 {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static StringBuilder sb = new StringBuilder();
 	

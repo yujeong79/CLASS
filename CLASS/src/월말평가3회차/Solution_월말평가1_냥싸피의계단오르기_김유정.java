@@ -6,8 +6,7 @@ import java.util.*;
 public class Solution_월말평가1_냥싸피의계단오르기_김유정 {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static StringBuilder sb = new StringBuilder();
-	
-	static final int[] stairs = {1, 3, 4};
+
 	static int H;
 	
 	public static void main(String[] args) throws IOException {

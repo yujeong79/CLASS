@@ -43,8 +43,8 @@ public class Solution_월말평가3_영토분할하기_김유정 {
 	private static void powerset(int idx) {
 		if(idx >= N*M) {
 			divideArea = new boolean[N][M];
-			blue = 0;
-			orange = N*M;
+			blue = -1;
+			orange = -1;
 			
 			int blueSum = 0;
 			int orangeSum = 0;
@@ -53,14 +53,14 @@ public class Solution_월말평가3_영토분할하기_김유정 {
 				if(isSelected[i]) {
 					divideArea[i/M][i%M] = true;
 					blueSum += map[i/M][i%M];
-					blue++;
-					orange--;
+					if(blue == -1) blue = i; // blue 영토 좌표 아무 곳이나 한 군데 저장
 				} else {
 					orangeSum += map[i/M][i%M];
+					if(orange == -1) orange = i;
 				}
 			}
 			
-			if(BFS()) {
+			if(blue != -1 && orange != -1 && BFS(blue, orange)) {
 				minDiff = Math.min(minDiff, Math.abs(orangeSum-blueSum));
 			}
 			
@@ -73,39 +73,36 @@ public class Solution_월말평가3_영토분할하기_김유정 {
 		powerset(idx+1);
 	}
 
-	private static boolean BFS() { // true가 blue, false가 orange
+	private static boolean BFS(int b, int o) { // true가 blue, false가 orange
 		Queue<Integer> queue = new LinkedList<>();
 		
-		boolean flag;
-		int leftPoint;
+		queue.add(b);
+		queue.add(o);
 		
-		queue.add(0);
-		if(divideArea[0][0]) { // true라면, 즉 blue라면
-			flag = true;
-			divideArea[0][0] = !flag;
-			leftPoint = blue - 1;
-		} else { // false라면, 즉 orange라면
-			flag = false;
-			divideArea[0][0] = !flag;
-			leftPoint = orange - 1;
-		}
+		boolean[][] isVisited = new boolean[N][M];
+		isVisited[b/M][b%M] = true;
+		isVisited[o/M][o%M] = true;
+		
+		int notVisited = N*M-2;
 		
 		while(!queue.isEmpty()) {
 			int curr = queue.poll();
+			int r = curr/M;
+			int c = curr%M;
 			
 			for(int d = 0; d < 4; d++) {
-				int nr = curr/M + dir[d][0];
-				int nc = curr%M + dir[d][1];
+				int nr = r + dir[d][0];
+				int nc = c + dir[d][1];
 				
-				if(nr >= 0 && nr < N && nc >= 0 && nc < M && divideArea[nr][nc] == flag) {
-					divideArea[nr][nc] = !flag;
+				if(nr >= 0 && nr < N && nc >= 0 && nc < M && !isVisited[nr][nc] && divideArea[nr][nc] == divideArea[r][c]) {
+					isVisited[nr][nc] = true;
 					queue.add(nr*M + nc%M);
-					leftPoint--;
+					notVisited--;
 				}
 			}
 		}
 		
-		if(leftPoint <= 0) return true;
+		if(notVisited <= 0) return true;
 		else return false;
 		
 	}
